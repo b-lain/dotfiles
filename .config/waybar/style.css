@@ -1,0 +1,41 @@
+#waybar {
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0;
+    color: #ebdbb2;
+    font-family: "Fira Mono", "Noto fonts";
+    font-size: 12px;
+    background: rgba(40, 40, 40, 0.96);
+}
+
+#workspaces button {
+    color: #928374;
+    padding: 0 3px 0 3px;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: #282828;
+}
+
+#workspaces button.focused {
+    color: #fabd2f;
+}
+
+#workspaces button.urgent {
+    color: #d3869b;
+}
+
+#network.netico, #custom-cpuico, #custom-memico, #pulseaudio.pulsico,
+#custom-langico, #custom-clico {
+    color: #928374;
+    padding: 0 3px 0 3px;
+}
+
+#network, #cpu, #memory, #pulseaudio, #language, #clock {
+    padding: 0 3px 0 3px;
+}
+
+#tray {
+    padding-right: 3px;
+}

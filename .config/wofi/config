@@ -1,0 +1,4 @@
+mode=drun
+prompt=run
+term=/bin/alacritty
+gtk_dark=true

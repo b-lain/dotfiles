@@ -1,0 +1,310 @@
+xwayland disable
+
+###############
+## VARIABLES ##
+###############
+
+
+# Set mod key
+set $mod Mod4
+set $alt Mod1
+# Set direction keys
+set $left h
+set $down j
+set $up k
+set $right l
+# Set terminal emulator
+set $term alacritty
+# Set browser
+set $browser firefox
+# Set file manager
+set $filemanager thunar
+# Set application menu
+# set $menu "rofi -show run
+# Alternative menu
+set $menu bemenu-run -i -p "run" --fork --scrollbar autohide -b -H 24 --fn 'Fira Mono 10' --tb '#282828' --tf '#FABD2F' --fb '#282828' --ff '#EBDBB2' --nb '#282828' --nf '#EBDBB2' --hb '#202020' --hf '#FABD2F' --scb '#282828' --scf '#FABD2F' 
+# Set gnome chema shortcut
+set $gnome-schema org.gnome.desktop.interface
+
+
+
+###########################
+## DISPLAY CONFIGURATION ##
+###########################
+# swaymsg -t get_outputs  #
+###########################
+
+
+# Set wallpapers
+output eDP-1  bg $HOME/Pictures/room.jpg fill
+#output HDMI-A-1 bg $HOME/Pictures/wonderegg.jpg fill
+# Monitor configuration
+output eDP-1 resolution 1366x768 position 0,0
+output HDMI-A-1 resolution 1366x768 position 1366,0
+
+
+
+################
+## APPEARANCE ##
+################
+
+
+# Set cursor theme and size
+
+# Font for window titles
+font pango:Fira Mono 10
+# Gaps
+gaps inner 3
+gaps outer 2
+smart_gaps on
+# Borders
+default_border pixel 2
+default_floating_border normal
+# Waybar
+bar {
+    swaybar_command waybar
+}
+ # Class                 Border---Background-Text-----Indicator-Child border
+ #client.focused          #C7A551  #C7A551    #202020  #C7A551   #C7A551
+ #client.focused_inactive #333333  #404040    #B2A191  #484E50   #5F676A
+ #client.unfocused        #333333  #757978    #B2A191  #292D2E   #222222
+ #client.urgent           #2F343A  #900000    #FFFFFF  #900000   #900000
+ #client.placeholder      #000000  #0C0C0C    #FFFFFF  #000000   #0C0C0C
+ #
+ #client.background       #171717
+
+#class                 border  bground text    indicator child_border
+client.focused          #FABD2F #282828 #EBDBB2 #FABD2F   #FABD2F
+client.focused_inactive #EBDBB2 #282828 #EBDBB2 #EBDBB2   #EBDBB2
+client.unfocused        #928374 #282828 #282828 #928374   #928374
+client.urgent           #B8BB26 #282828 #B8BB26 #B8BB26   #B8BB26
+client.placeholder      #EBDBB2 #928374 #EBDBB2 #EBDBB2   #EBDBB2
+client.background       #282828
+# Gnome theme
+exec_always {
+	gsettings set $gnome-schema gtk-theme 'gruvbox-gtk'
+	gsettings set $gnome-schema icon-theme 'gruvbox-icons'
+	gsettings set $gnome-schema cursor-theme 'Adwaita'
+	gsettings set $ghome-schema font-name 'Fira Sans 12'
+}
+
+
+
+###############
+## BEHAVIOUR ##
+###############
+
+
+
+# Logout menu
+bindsym $mod+Shift+e mode "$logout"
+set $logout (L)ock, (E)xit, (R)eboot, (S)hutdown
+mode "$logout" {
+    bindsym Shift+l exec --no-startup-id swaylock --image $HOME/Pictures/copland.jpg, mode "default"
+    bindsym Shift+e exec --no-startup-id swaymsg exit, mode "default"
+    bindsym Shift+r exec --no-startup-id reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id shutdown now, mode "default"
+
+    #exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# Lockscreen
+#exec swayidle -w \
+#         timeout 300 'swaylock -f -c 000000' \
+#         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#         before-sleep 'swaylock -f -c 000000'
+# Automatically putting clients on specific workspace
+
+# Automaticaly focus on activating window
+focus_on_window_activation smart
+for_window [urgent="latest"] focus
+# Change color temperature
+
+
+
+#########################
+## INPUT CONFIGURATION ##
+#########################
+# swaymsg -t get_inputs #
+# man 5 sway-input      #
+#########################
+
+
+
+# Touchpad config
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation enabled
+}
+# Keyboard layout
+input * {
+    xkb_layout "us,ru"
+    xkb_options "altwin:swap_alt_win,caps:swapescape,grp:win_space_toggle"
+}
+# Typematic delay and rate
+input "type:keyboard" {
+	repeat_delay 250
+	repeat_rate 60
+}
+
+
+
+##################
+## KEY BINDINGS ##
+##################
+
+
+
+# Start terminal
+bindsym $mod+Return exec $term
+# Kill focused window
+bindsym $mod+Shift+q kill
+# Start launcher
+bindsym $mod+Shift+Return exec $menu 
+# Floating modifier
+floating_modifier $mod normal
+# Reload configuration file
+bindsym $mod+Shift+r reload
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Same, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# Switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace 1
+bindsym $mod+Ctrl+2 move container to workspace 2
+bindsym $mod+Ctrl+3 move container to workspace 3
+bindsym $mod+Ctrl+4 move container to workspace 4
+bindsym $mod+Ctrl+5 move container to workspace 5
+bindsym $mod+Ctrl+6 move container to workspace 6
+bindsym $mod+Ctrl+7 move container to workspace 7
+bindsym $mod+Ctrl+8 move container to workspace 8
+bindsym $mod+Ctrl+9 move container to workspace 9
+bindsym $mod+Ctrl+0 move container to workspace 10
+# Switch to workspace and move focused container
+bindsym $mod+Shift+1 move container to workspace 1; workspace 1
+bindsym $mod+Shift+2 move container to workspace 2; workspace 2
+bindsym $mod+Shift+3 move container to workspace 3; workspace 3
+bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Shift+5 move container to workspace 5; workspace 5
+bindsym $mod+Shift+6 move container to workspace 6; workspace 6
+bindsym $mod+Shift+7 move container to workspace 7; workspace 7
+bindsym $mod+Shift+8 move container to workspace 8; workspace 8
+bindsym $mod+Shift+9 move container to workspace 9; workspace 9
+bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+# Change layout
+bindsym $mod+b splith
+bindsym $mod+v splitv
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+# Move focus to the parent container
+bindsym $mod+a focus parent
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+# Show the next scratchpad
+bindsym $mod+minus scratchpad show
+# Resizing containers:
+bindsym $mod+Ctrl+$left  resize shrink width 10px
+bindsym $mod+Ctrl+$up  resize grow height 10px
+bindsym $mod+Ctrl+$down    resize shrink height 10px
+bindsym $mod+Ctrl+$right resize grow width 10px
+# Resizing, with arrow keys
+bindsym $mod+Ctrl+Left resize shrink width 10px
+bindsym $mod+Ctrl+Down resize grow height 10px
+bindsym $mod+Ctrl+Up resize shrink height 10px
+bindsym $mod+Ctrl+Right resize grow width 10px
+# Brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set +10
+bindsym XF86MonBrightnessDown exec brightnessctl set 10-
+# Open sway config in helix
+bindsym $mod+Ctrl+Shift+c exec "$term -e hx $HOME/.config/sway/config"
+# Change volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 --allow-boost
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 --allow-boost
+bindsym XF86AudioMute exec --no-startup-id pamixer --toggle-mute
+# Monitor settings GUI
+bindsym $mod+Shift+m exec wdisplays
+# Make screenshot and save to clipboard
+bindsym Print exec --no-startup-id grimshot --notify copy output
+# Make screenshot and save to ~/Pictures/
+bindsym Ctrl+Print exec --no-startup-id grimshot --notify save 
+# Make screenshot from selected area and copy to clipboard
+bindsym $mod+Print exec grimshot copy area
+# Make screenshot from selected area and save to ~/Pictures/
+bindsym $mod+Ctrl+Print exec grimshot save area
+# Exec browser
+bindsym $mod+Shift+b exec $browser
+# Exec qutebrowser
+bindsym $mod+Shift+F2 exec qutebrowser
+# Exec file manager
+bindsym $mod+Shift+f exec $filemanager
+# Exec ranger
+bindsym $mod+Shift+F3 exec $term -e ranger
+# Exec code
+bindsym $mod+Shift+c exec alacritty -e hx
+bindsym $mod+Shift+t exec telegram-desktop
+# Exec image viewer
+bindsym $mod+Shift+i exec eog 
+# Open network manager ui
+bindsym $mod+Shift+n exec $term -e nmtui-connect
+# Open photoshop
+bindsym $mod+Shift+p exec gimp
+# Open virtualbox
+bindsym $mod+Shift+v exec virtualbox
+# Open system monitor
+bindsym $mod+Shift+s exec $term -e gotop
+
+
+
+###############
+## AUTOSTART ##
+###############
+
+
+
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+include /etc/sway/config.d/*
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+exec wl-paste -t text --watch clipman store
