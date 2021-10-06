@@ -1,5 +1,8 @@
 theme = "GRUVBOX"
 
+[editor]
+line-number = "relative"
+auto-pairs = false
+
 [lsp]
 display-messages = true
-

@@ -12,6 +12,9 @@ compinit
 # End of lines added by compinstall
 
 alias dcfg='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+# alias hx='/usr/bin/helix'
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+PATH=$PATH:$HOME/.cargo/bin
 
 eval "$(starship init zsh)"

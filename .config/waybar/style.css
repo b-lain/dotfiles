@@ -28,6 +28,7 @@
 
 #network.netico, #custom-cpuico, #custom-memico, #pulseaudio.pulsico,
 #custom-langico, #custom-clico {
+    font-size: 16px;
     color: #928374;
     padding: 0 3px 0 3px;
 }
